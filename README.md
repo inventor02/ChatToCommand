@@ -4,7 +4,7 @@ ChatToCommand allows you to easily run commands when users type certain messages
 
 ### Support and installation instructions
 
-These can be found on the [main plugin page](https://dev.bukkit.org/projects/chattocommand).
+These can be found on the [main plugin page](https://www.spigotmc.org/resources/chattocommand.55350/).
 
 ### Contributing
 
