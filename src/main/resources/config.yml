@@ -14,6 +14,8 @@ log: true
 # Whether you want the chat message itself to be cancelled (true)
 cancel-chat: true
 
-# The triggers
-triggers:
-  hello: "msg %player_name% Hey!"
+# Whether you want to allow the chat message to process if the user does not have permission.
+allow-chat-with-no-permissions: true
+
+# Whether you want to allow the chat message to process if the user is in the incorrect world.
+allow-chat-with-incorrect-world: true

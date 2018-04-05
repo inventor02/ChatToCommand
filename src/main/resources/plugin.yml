@@ -5,3 +5,8 @@ softdepend: [PlaceholderAPI]
 authors: [inventor02]
 description: Convert chat messages to commands.
 website: https://georgepeppard.me
+
+commands:
+  chattocommand:
+    description: ChatToCommand information and loaded triggers.
+    aliases: [ctc]
