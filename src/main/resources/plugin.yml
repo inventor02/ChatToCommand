@@ -1,0 +1,7 @@
+name: ChatToCommand
+version: ${project.version}
+main: me.georgepeppard.chattocommand.ChatToCommand
+softdepend: [PlaceholderAPI]
+authors: [inventor02]
+description: Convert chat messages to commands.
+website: https://georgepeppard.me
