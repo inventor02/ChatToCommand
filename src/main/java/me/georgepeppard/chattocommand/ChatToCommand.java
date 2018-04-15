@@ -1,5 +1,6 @@
 package me.georgepeppard.chattocommand;
 
+import com.google.common.base.Charsets;
 import me.georgepeppard.chattocommand.commands.InfoCommand;
 import me.georgepeppard.chattocommand.handlers.ChatHandler;
 import me.georgepeppard.chattocommand.triggers.Trigger;
@@ -13,6 +14,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.List;
 
@@ -29,10 +32,9 @@ public final class ChatToCommand extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        Metrics metrics = new Metrics(this);
+        Metrics metrics = new Metrics(  this);
 
         initConfigs();
-        loadTriggers();
 
         if(Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
             getLogger().info("PlaceholderAPI found.");
@@ -61,13 +63,15 @@ public final class ChatToCommand extends JavaPlugin {
         config = new YamlConfiguration();
         triggersConfig = new YamlConfiguration();
 
-        try {
-            config.load(configFile);
-            triggersConfig.load(triggersFile);
-        } catch(IOException | InvalidConfigurationException e) {
-            getLogger().severe("Failed to load configuration.");
-            e.printStackTrace();
-        }
+        reloadConfig();
+    }
+
+    @Override
+    public void reloadConfig() {
+        config = YamlConfiguration.loadConfiguration(configFile);
+        triggersConfig = YamlConfiguration.loadConfiguration(triggersFile);
+
+        loadTriggers();
     }
 
     private void loadTriggers() {
@@ -90,7 +94,7 @@ public final class ChatToCommand extends JavaPlugin {
             aliases.forEach(alias -> triggers.put(alias, trigger));
         });
 
-        getLogger().info("Complete! Loaded " + triggers.size() + " triggers.");
+        getLogger().info("Complete! Loaded " + triggers.size() + " triggers and aliases.");
     }
 
     private void initHandlers() {

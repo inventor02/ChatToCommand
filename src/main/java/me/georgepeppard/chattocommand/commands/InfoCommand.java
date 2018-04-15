@@ -17,10 +17,23 @@ public class InfoCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
-        sender.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "ChatToCommand" + ChatColor.GRAY + " version " + plugin.getDescription().getVersion() + " by " + String.join(", ", plugin.getDescription().getAuthors()) + ".");
-        sender.sendMessage(ChatColor.GREEN + "" + plugin.getTriggers().size() + " triggers loaded:");
-        sender.sendMessage(ChatColor.GRAY + "'" + String.join("', '", plugin.getTriggers().keySet()) + "'");
+        if(args.length == 0) {
+            sender.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "ChatToCommand" + ChatColor.GRAY + " version " + plugin.getDescription().getVersion() + " by " + String.join(", ", plugin.getDescription().getAuthors()) + ".");
+            sender.sendMessage(ChatColor.GREEN + "" + plugin.getTriggers().size() + " triggers loaded:");
+            sender.sendMessage(ChatColor.GRAY + "'" + String.join("', '", plugin.getTriggers().keySet()) + "'");
+            sender.sendMessage(ChatColor.GREEN + "Available subcommands: " + ChatColor.GRAY + "reload");
 
+            return true;
+        }
+
+        if(args[0].equalsIgnoreCase("reload")) {
+            plugin.reloadConfig();
+            sender.sendMessage(ChatColor.GREEN + "Configurations have been reloaded. Loaded " + plugin.getTriggers().size() + " triggers and aliases.");
+
+            return true;
+        }
+
+        sender.sendMessage(ChatColor.RED + "Invalid subcommand. Run /chattocommand for help.");
         return true;
     }
 }
